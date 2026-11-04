@@ -107,6 +107,15 @@
     .total-row { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; }
     .btn-checkout { width: 100%; background: var(--whatsapp); color: var(--white); padding: 15px; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; }
 
+    /* CONTACT & FOOTER (Professional) */
+    .contact-section { background: #fff; padding: 60px 20px; border-top: 1px solid var(--border); text-align: center; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .contact-item { padding: 20px; background: var(--bg-body); border-radius: 12px; }
+    .contact-item h3 { color: var(--primary); margin-bottom: 10px; }
+    .map-container { max-width: 1200px; margin: 40px auto 0; border-radius: 12px; overflow: hidden; height: 300px; }
+    .map-container iframe { width: 100%; height: 100%; border: none; }
+    footer { background: var(--header-bg); color: #94a3b8; text-align: center; padding: 20px; margin-top: 40px; }
+
     .float-wa { position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(37,211,102,0.3); z-index: 500; }
     .float-wa img { width: 35px; height: 35px; }
 
@@ -124,16 +133,18 @@
 
   <!-- WELCOME / LOGIN POPUP ON START -->
   <div class="modal active" id="welcome-modal">
-    <div class="modal-content" style="max-width: 400px; text-align: center;">
+    <div class="modal-content" style="max-width: 450px; text-align: center;">
       <h2 style="color: var(--primary);">Welcome to Vishwakarma Workshop!</h2>
       <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 1rem;">Aapka hamari dukaan par swagat hai. Shopping shuru karne ke liye kripya login karein.</p>
       
-      <!-- LOGIN/SIGNUP FORM -->
       <div id="auth-forms">
-        <!-- Email/Password Form -->
+        <!-- Email/Password Form (Includes Name and Phone for complete details) -->
         <form id="email-auth-form" onsubmit="handleEmailAuth(event)" style="display: block;">
-          <div class="input-group" id="name-group" style="display: none;">
-            <input type="text" id="auth-name" placeholder="Full Name">
+          <div class="input-group">
+            <input type="text" id="auth-name" required placeholder="Full Name (Aapka Naam)">
+          </div>
+          <div class="input-group">
+            <input type="tel" id="auth-phone" required placeholder="Mobile Number (10 digits)" pattern="[0-9]{10}">
           </div>
           <div class="input-group">
             <input type="email" id="auth-email" required placeholder="Email ID">
@@ -141,7 +152,7 @@
           <div class="input-group">
             <input type="password" id="auth-password" required placeholder="Password (min 6 chars)">
           </div>
-          <button type="submit" class="btn btn-submit" id="email-auth-btn">Sign In</button>
+          <button type="submit" class="btn btn-submit" id="email-auth-btn">Sign In / Sign Up</button>
         </form>
 
         <!-- Phone OTP Form -->
@@ -162,7 +173,6 @@
         </button>
         
         <button class="btn-switch" onclick="switchAuthMethod()" id="auth-switch-btn">Login with Phone Number</button>
-        <button class="btn-switch" onclick="toggleEmailMode()" id="auth-toggle-text" style="display: none;">New user? Create an account</button>
       </div>
     </div>
   </div>
@@ -203,6 +213,33 @@
   <div class="container" id="products">
     <div class="grid" id="product-grid"></div>
   </div>
+
+  <!-- CONTACT SECTION (Professional) -->
+  <section class="contact-section" id="contact">
+    <h2 style="margin-bottom: 40px; font-size: 2rem; color: var(--header-bg);">Get In Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <h3>📍 Address</h3>
+        <p>Ranchi-Patna Road, Near Electricity Office, Punjabi Mohalla, Koderma, Jharkhand – 825410</p>
+      </div>
+      <div class="contact-item">
+        <h3>📱 Contact</h3>
+        <p><a href="https://wa.me/916200973301" style="color: var(--primary); font-weight: 700; text-decoration: none;">+91 6200973301</a></p>
+        <p>Mon - Sat: 9AM - 8PM</p>
+      </div>
+      <div class="contact-item">
+        <h3>🚚 Delivery & Payment</h3>
+        <p>Home delivery available in Koderma. UPI, Paytm, and Cash accepted.</p>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps?q=Koderma+Punjabi+Mohalla+Jharkhand&output=embed" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Vishwakarma Electrical Workshop | Built with ❤️</p>
+  </footer>
 
   <!-- CHECKOUT MODAL -->
   <div class="modal" id="checkout-modal">
@@ -269,11 +306,11 @@
     const WA_NUMBER = "916200973301";
     let cart = [];
     let allProducts = [];
-    let isLoginMode = true; // Email mode default
     let isPhoneMode = false;
     let confirmationResult = null;
+    let tempUserDetails = {}; // Store details before saving
 
-    // 2. PRODUCTS DATA (Only 4 Products as requested)
+    // 2. PRODUCTS DATA (4 Products)
     const stockImages = {
       grinder: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80",
       drill: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?w=400&q=80"
@@ -332,46 +369,60 @@
       const emailForm = document.getElementById('email-auth-form');
       const phoneForm = document.getElementById('phone-auth-form');
       const switchBtn = document.getElementById('auth-switch-btn');
-      const toggleText = document.getElementById('auth-toggle-text');
 
       if (isPhoneMode) {
         emailForm.style.display = 'none';
         phoneForm.style.display = 'block';
         switchBtn.innerText = 'Login with Email/Password';
-        toggleText.style.display = 'none';
       } else {
         emailForm.style.display = 'block';
         phoneForm.style.display = 'none';
         switchBtn.innerText = 'Login with Phone Number';
-        if (!isLoginMode) toggleText.style.display = 'block';
       }
     }
 
-    function toggleEmailMode() {
-      isLoginMode = !isLoginMode;
-      document.getElementById('email-auth-btn').innerText = isLoginMode ? "Sign In" : "Sign Up";
-      document.getElementById('auth-toggle-text').innerText = isLoginMode ? "New user? Create an account" : "Already have an account? Sign In";
-      document.getElementById('name-group').style.display = isLoginMode ? "none" : "block";
-    }
-
+    // Handle Email/Phone Sign Up/Login & Save Details
     async function handleEmailAuth(e) {
       e.preventDefault();
+      const name = document.getElementById('auth-name').value;
+      const phone = document.getElementById('auth-phone').value;
       const email = document.getElementById('auth-email').value;
       const password = document.getElementById('auth-password').value;
-      const name = document.getElementById('auth-name').value;
 
       try {
-        if (isLoginMode) {
-          await auth.signInWithEmailAndPassword(email, password);
-        } else {
-          const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-          await userCredential.user.updateProfile({ displayName: name });
-        }
+        // Create user with email/password
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Update Profile Name
+        await user.updateProfile({ displayName: name });
+        
+        // Save ALL details to Firestore
+        await db.collection("users").doc(user.uid).set({
+          name: name,
+          phone: phone,
+          email: email,
+          createdAt: new Date()
+        });
+
         closeWelcomeModal();
-      } catch (error) { alert("Error: " + error.message); }
+        alert(`Thank you ${name}! Aapka account ban gaya hai.`);
+      } catch (error) {
+        // If user already exists, try logging in
+        if (error.code === 'auth/email-already-in-use') {
+          try {
+            await auth.signInWithEmailAndPassword(email, password);
+            closeWelcomeModal();
+          } catch (loginError) {
+            alert("Login Failed: " + loginError.message);
+          }
+        } else {
+          alert("Error: " + error.message);
+        }
+      }
     }
 
-    // Phone Auth Logic
+    // Phone Auth Logic (OTP)
     async function handlePhoneAuth(e) {
       e.preventDefault();
       const phoneNumber = document.getElementById('phone-number').value;
@@ -379,7 +430,6 @@
       
       if (otpBtn.innerText === "Send OTP") {
         try {
-          // Setup reCAPTCHA (invisible for phone auth)
           window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('phone-auth-btn', { 'size': 'invisible' });
           confirmationResult = await auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
           document.getElementById('otp-group').style.display = 'block';
@@ -398,7 +448,11 @@
     function handleGoogleAuth() {
       const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider)
-        .then(() => closeWelcomeModal())
+        .then((result) => {
+          const user = result.user;
+          // If Google doesn't provide phone, we ask for it later in checkout
+          closeWelcomeModal();
+        })
         .catch((error) => alert("Google Sign-In Failed: " + error.message));
     }
 
@@ -409,15 +463,28 @@
       document.getElementById('welcome-modal').classList.add('active');
     }
 
-    // Auth State Listener (Updates Header)
-    auth.onAuthStateChanged(user => {
+    // Auth State Listener (Auto-fill checkout)
+    auth.onAuthStateChanged(async user => {
       const profileDiv = document.getElementById('user-profile');
       if (user) {
-        const displayName = user.displayName || user.phoneNumber || user.email.split('@')[0];
+        // Fetch user data from Firestore (to get phone number)
+        const userDoc = await db.collection("users").doc(user.uid).get();
+        const userData = userDoc.exists ? userDoc.data() : {};
+
+        const displayName = userData.name || user.displayName || user.email.split('@')[0];
         profileDiv.innerHTML = `<span>Hello, ${displayName}</span><strong style="font-size: 0.95rem;">My Account</strong>`;
-        closeWelcomeModal(); // Auto close if already logged in
+        
+        // Save these details globally to auto-fill checkout later
+        window.currentUserData = {
+          name: displayName,
+          phone: userData.phone || "",
+          email: user.email
+        };
+        
+        closeWelcomeModal();
       } else {
         profileDiv.innerHTML = `<span>Hello, Sign in</span><strong style="font-size: 0.95rem;">Account</strong>`;
+        window.currentUserData = null;
       }
     });
 
@@ -481,15 +548,17 @@
       cartTotal.innerText = `₹${total.toLocaleString('en-IN')}`;
     }
 
-    // 6. CHECKOUT
+    // 6. CHECKOUT (AUTO-FILL LOGIC)
     function openCheckout() {
       if (cart.length === 0) { alert("Your cart is empty!"); return; }
       toggleCart(); 
-      const user = auth.currentUser;
-      if (user) {
-        document.getElementById('cust-name').value = user.displayName || '';
-        if(user.phoneNumber) document.getElementById('cust-phone').value = user.phoneNumber.replace('+91','');
+      
+      // Auto-fill details if user is logged in
+      if (window.currentUserData) {
+        document.getElementById('cust-name').value = window.currentUserData.name || "";
+        document.getElementById('cust-phone').value = window.currentUserData.phone || "";
       }
+      
       document.getElementById('checkout-modal').classList.add('active');
     }
 
@@ -516,7 +585,8 @@
         await db.collection("orders").add({
           customerName: name, phone: phone, address: address,
           items: orderItems, totalAmount: total, orderDate: new Date(), status: "Pending",
-          userId: auth.currentUser ? auth.currentUser.uid : "Guest"
+          userId: auth.currentUser ? auth.currentUser.uid : "Guest",
+          userEmail: window.currentUserData ? window.currentUserData.email : "Guest"
         });
       } catch (error) { console.error("Order save error:", error); }
 
@@ -527,7 +597,7 @@
       updateCartUI();
       closeCheckout();
       document.getElementById('checkout-form').reset();
-      alert("Thank you for your order! Aapki details humein mil gayi hain.");
+      alert(`Thank you ${name}! Aapka order WhatsApp par share ho gaya hai.`);
     }
 
     // Initialize
