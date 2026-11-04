@@ -112,4 +112,4 @@ footer { text-align: center; padding: 30px; border-top: 1px solid var(--border-g
   .hero-btns { flex-direction: column; }
   header { flex-direction: column; gap: 15px; }
   .repair-container { flex-direction: column; }
-}
+} 
