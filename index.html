@@ -3,88 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vishwakarma Electrical Workshop | Power Tools</title>
+  <title>Vishwakarma Electrical Workshop | Online Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* Amazon/Flipkart Style Light Theme */
     :root {
-      --bg: #0a0a0f;
-      --card: #13131f;
-      --primary: #00f3ff;
-      --text: #ffffff;
-      --muted: #a0a0b0;
-      --border: rgba(255,255,255,0.1);
+      --bg-light: #f3f3f3;
+      --header-bg: #131921;
+      --nav-bg: #232f3e;
+      --primary: #f0c14b;
+      --primary-hover: #ddb347;
+      --btn-orange: #ffa41c;
+      --btn-orange-hover: #f7941d;
+      --text-dark: #0f1111;
+      --text-light: #565959;
+      --border: #ddd;
+      --white: #ffffff;
       --whatsapp: #25D366;
-      --yellow: #ffb703;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', Arial, sans-serif; }
+    body { background-color: var(--bg-light); color: var(--text-dark); }
 
     /* HEADER */
-    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; border-bottom: 1px solid var(--border); background: rgba(10, 10, 15, 0.9); position: sticky; top: 0; z-index: 100; }
-    .logo { font-weight: 800; font-size: 1.2rem; }
-    .logo span { display: block; font-size: 0.8rem; color: var(--primary); font-weight: 400; }
-    nav { display: flex; align-items: center; gap: 15px; }
-    nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-    nav a:hover { color: var(--primary); }
-    .cart-btn { background: rgba(0, 243, 255, 0.1); border: 1px solid var(--primary); color: var(--primary); padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 5px; }
-    .cart-btn span { background: var(--primary); color: #000; padding: 2px 8px; border-radius: 50%; font-size: 0.8rem; font-weight: bold; }
-
-    /* HERO */
-    .hero { text-align: center; padding: 60px 20px; background: linear-gradient(to bottom, #13131f, #0a0a0f); }
-    .hero h1 { font-size: 2.5rem; margin: 15px 0; }
-    .glow-text { color: var(--primary); text-shadow: 0 0 15px rgba(0, 243, 255, 0.5); }
-
-    /* PRODUCTS */
-    section { padding: 40px 5%; max-width: 1200px; margin: auto; }
-    .section-title { font-size: 2rem; text-align: center; margin-bottom: 30px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    header { background-color: var(--header-bg); color: var(--white); position: sticky; top: 0; z-index: 100; }
+    .top-nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; gap: 20px; }
     
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: 0.3s; }
-    .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1); }
-    .card-img { height: 200px; background: #000; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .card-img svg { width: 100%; height: 100%; object-fit: contain; }
-    .card-body { padding: 20px; }
-    .brand-tag { color: var(--primary); font-size: 0.8rem; text-transform: uppercase; font-weight: 600; }
-    .card-body h3 { margin: 5px 0 15px; font-size: 1.2rem; }
-    .specs { font-size: 0.85rem; color: var(--muted); margin-bottom: 15px; }
-    .price { font-size: 1.4rem; font-weight: 800; color: var(--yellow); margin-bottom: 15px; }
-    .btn-add { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-    .btn-add:hover { background: var(--primary); color: #000; }
+    .logo { font-size: 1.5rem; font-weight: 700; cursor: pointer; line-height: 1; }
+    .logo span { font-size: 0.8rem; color: var(--primary); display: block; font-weight: 400; margin-top: 2px; }
+    
+    .search-bar { flex-grow: 1; display: flex; height: 40px; border-radius: 4px; overflow: hidden; }
+    .search-bar input { flex-grow: 1; padding: 0 15px; border: none; outline: none; font-size: 1rem; }
+    .search-bar button { background: var(--primary); border: none; padding: 0 20px; cursor: pointer; }
+    .search-bar button:hover { background: var(--primary-hover); }
+    
+    .nav-icons { display: flex; gap: 20px; align-items: center; }
+    .nav-item { display: flex; flex-direction: column; cursor: pointer; color: var(--white); text-decoration: none; font-size: 0.8rem; }
+    .nav-item strong { font-size: 0.9rem; }
+    .nav-item:hover { border: 1px solid var(--white); border-radius: 2px; padding: 2px 4px; margin: -3px -5px; }
+    
+    .cart-btn { display: flex; align-items: flex-end; gap: 5px; background: none; border: none; color: var(--white); cursor: pointer; font-size: 1rem; font-weight: bold; position: relative; }
+    .cart-btn .cart-count { position: absolute; top: -8px; left: 12px; background: var(--btn-orange); color: var(--text-dark); font-size: 0.8rem; font-weight: bold; padding: 0 6px; border-radius: 10px; }
+    
+    .sub-nav { background-color: var(--nav-bg); padding: 8px 20px; display: flex; gap: 20px; color: var(--white); font-size: 0.9rem; }
+    .sub-nav a { color: var(--white); text-decoration: none; cursor: pointer; }
+    .sub-nav a:hover { text-decoration: underline; }
+
+    /* HERO BANNER */
+    .hero-banner { background: linear-gradient(to right, #232f3e, #37475a); color: var(--white); text-align: center; padding: 40px 20px; margin-bottom: 20px; }
+    .hero-banner h1 { font-size: 2rem; margin-bottom: 10px; }
+    .hero-banner p { font-size: 1rem; color: #ddd; }
+
+    /* MAIN CONTAINER */
+    .container { max-width: 1500px; margin: 0 auto; padding: 0 20px 40px 20px; }
+
+    /* PRODUCT GRID */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    
+    .card { background: var(--white); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; transition: 0.2s; border: 1px solid var(--border); }
+    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); }
+    
+    .card-img { width: 100%; height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px; }
+    .card-img img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s; }
+    .card:hover .card-img img { transform: scale(1.05); }
+    
+    .brand-tag { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 5px; }
+    .card-title { font-size: 1rem; font-weight: 500; margin-bottom: 8px; line-height: 1.3; }
+    .rating { color: #ffa41c; font-size: 0.9rem; margin-bottom: 8px; }
+    
+    .price-row { display: flex; align-items: flex-start; gap: 5px; margin-bottom: 15px; margin-top: auto; }
+    .price-symbol { font-size: 0.8rem; margin-top: 3px; }
+    .price-whole { font-size: 1.5rem; font-weight: 500; }
+    .price-decimal { font-size: 0.8rem; margin-top: 3px; }
+    
+    .btn-group { display: flex; flex-direction: column; gap: 8px; }
+    .btn { padding: 10px; border-radius: 20px; border: none; cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: 0.2s; text-align: center; }
+    .btn-cart { background: var(--primary); color: var(--text-dark); }
+    .btn-cart:hover { background: var(--primary-hover); }
+    .btn-buy { background: var(--btn-orange); color: var(--text-dark); }
+    .btn-buy:hover { background: var(--btn-orange-hover); }
 
     /* CART SIDEBAR */
-    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
     .cart-overlay.active { opacity: 1; visibility: visible; }
-    .cart-sidebar { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100%; background: var(--card); z-index: 1001; transition: 0.3s; display: flex; flex-direction: column; border-left: 1px solid var(--border); }
+    .cart-sidebar { position: fixed; top: 0; right: -450px; width: 100%; max-width: 400px; height: 100%; background: var(--white); z-index: 1001; transition: 0.3s; display: flex; flex-direction: column; }
     .cart-sidebar.active { right: 0; }
-    .cart-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .close-cart { background: none; border: none; color: var(--text); font-size: 2rem; cursor: pointer; }
-    .cart-items { flex-grow: 1; padding: 20px; overflow-y: auto; }
-    .cart-item { display: flex; gap: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; align-items: center; border: 1px solid #222; }
-    .cart-item-info h4 { font-size: 0.9rem; margin-bottom: 5px; }
-    .cart-item-info p { font-size: 0.8rem; color: var(--muted); }
-    .remove-item { background: none; border: none; color: #ff0055; font-size: 1.5rem; cursor: pointer; margin-left: auto; }
-    .cart-footer { padding: 20px; border-top: 1px solid var(--border); background: #0a0a0f; }
-    .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; color: var(--yellow); }
-    .btn-checkout { width: 100%; background: var(--whatsapp); color: #000; padding: 15px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
-    .btn-checkout:hover { background: #1da851; }
+    .cart-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); color: var(--white); }
+    .close-cart { background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+    .cart-items { flex-grow: 1; padding: 20px; overflow-y: auto; background: var(--bg-light); }
+    
+    .cart-item { display: flex; gap: 15px; margin-bottom: 15px; background: var(--white); padding: 10px; border-radius: 8px; align-items: center; border: 1px solid var(--border); }
+    .cart-item img { width: 60px; height: 60px; object-fit: contain; }
+    .cart-item-info h4 { font-size: 0.9rem; margin-bottom: 5px; font-weight: 500; }
+    .cart-item-info p { font-size: 0.9rem; color: var(--text-light); font-weight: bold; }
+    .remove-item { background: none; border: none; color: #d9534f; font-size: 1.2rem; cursor: pointer; margin-left: auto; }
+    
+    .cart-footer { padding: 20px; border-top: 1px solid var(--border); background: var(--white); }
+    .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
+    .btn-checkout { width: 100%; background: var(--primary); color: var(--text-dark); padding: 12px; font-size: 1rem; font-weight: 500; border: none; border-radius: 8px; cursor: pointer; }
+    .btn-checkout:hover { background: var(--primary-hover); }
 
-    /* MODAL (Checkout Form) */
-    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; }
+    /* CHECKOUT MODAL */
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; }
     .modal.active { opacity: 1; visibility: visible; }
-    .modal-content { background: var(--card); width: 90%; max-width: 450px; padding: 30px; border-radius: 16px; border: 1px solid var(--border); position: relative; max-height: 90vh; overflow-y: auto; }
-    .close-modal { position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--text); font-size: 2rem; cursor: pointer; }
-    .modal-content h2 { margin-bottom: 20px; color: var(--primary); }
+    .modal-content { background: var(--white); width: 90%; max-width: 450px; padding: 25px; border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto; }
+    .close-modal { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+    .modal-content h2 { margin-bottom: 20px; font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    
     .input-group { margin-bottom: 15px; }
-    .input-group label { display: block; font-size: 0.9rem; margin-bottom: 5px; color: var(--muted); }
-    .input-group input, .input-group textarea { width: 100%; padding: 12px; background: #0a0a0f; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 1rem; }
-    .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--primary); }
-    .btn-submit { width: 100%; background: var(--whatsapp); color: #000; font-size: 1.1rem; padding: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    .input-group label { display: block; font-size: 0.9rem; margin-bottom: 5px; font-weight: 500; }
+    .input-group input, .input-group textarea { width: 100%; padding: 10px; border: 1px solid #888; border-radius: 4px; font-family: inherit; font-size: 1rem; }
+    .input-group input:focus, .input-group textarea:focus { outline: none; border-color: #e77600; box-shadow: 0 0 3px rgba(231,118,0,0.5); }
+    
+    .btn-submit { width: 100%; background: var(--whatsapp); color: var(--white); font-size: 1rem; padding: 12px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+    .btn-submit:hover { background: #1da851; }
 
     /* FLOATING WHATSAPP */
-    .float-wa { position: fixed; bottom: 20px; right: 20px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; text-decoration: none; box-shadow: 0 5px 20px rgba(37,211,102,0.4); z-index: 500; }
-    
+    .float-wa { position: fixed; bottom: 20px; right: 20px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 500; transition: 0.3s; }
+    .float-wa:hover { transform: scale(1.1); }
+    .float-wa img { width: 35px; height: 35px; }
+
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2rem; }
+      .top-nav { flex-wrap: wrap; padding: 10px; }
+      .search-bar { order: 3; width: 100%; margin-top: 10px; }
+      .nav-item { display: none; } /* Hide text on mobile, keep icons */
+      .nav-icons { margin-left: auto; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+      .card-img { height: 150px; }
+      .card-title { font-size: 0.9rem; }
+      .price-whole { font-size: 1.2rem; }
+      .btn { font-size: 0.8rem; padding: 8px; }
       .cart-sidebar { max-width: 100%; }
     }
   </style>
@@ -93,90 +141,116 @@
 
   <!-- HEADER -->
   <header>
-    <div class="logo">Vishwakarma <span>Electrical Workshop</span></div>
-    <nav>
-      <button class="cart-btn" onclick="toggleCart()">
-        🛒 Cart <span id="cart-count">0</span>
-      </button>
-    </nav>
+    <div class="top-nav">
+      <div class="logo" onclick="window.scrollTo(0,0)">
+        Vishwakarma <span>Electrical Workshop</span>
+      </div>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Search power tools...">
+        <button>🔍</button>
+      </div>
+
+      <div class="nav-icons">
+        <!-- Profile / Login Option -->
+        <a href="#" class="nav-item" onclick="alert('Login/Profile feature coming soon!')">
+          <span style="font-size: 1.2rem;">👤</span>
+          <div>
+            <span>Hello, Sign in</span>
+            <strong>Account & Lists</strong>
+          </div>
+        </a>
+        
+        <button class="cart-btn" onclick="toggleCart()">
+          <span style="font-size: 1.8rem;">🛒</span>
+          <span class="cart-count" id="cart-count">0</span>
+          <strong style="margin-left: 5px; margin-bottom: 5px;">Cart</strong>
+        </button>
+      </div>
+    </div>
+    
+    <div class="sub-nav">
+      <a href="#products">All Products</a>
+      <a href="#products">Grinders</a>
+      <a href="#products">Drills</a>
+      <a href="#products">Cutters</a>
+      <a href="#">Repair Service</a>
+    </div>
   </header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Power Up Your <span class="glow-text">Work</span></h1>
-    <p style="color: var(--muted); margin-bottom: 20px;">Premium Power Tools in Koderma</p>
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <h1>Welcome to Vishwakarma Electrical Workshop</h1>
+    <p>Koderma's most trusted store for Power Tools & Repairs</p>
   </div>
 
   <!-- PRODUCTS -->
-  <section id="products">
-    <h2 class="section-title">Our Products</h2>
+  <div class="container" id="products">
     <div class="grid" id="product-grid"></div>
-  </section>
+  </div>
 
   <!-- CART SIDEBAR -->
   <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
   <div class="cart-sidebar" id="cart-sidebar">
     <div class="cart-header">
-      <h2>Your Cart 🛒</h2>
+      <h2>Shopping Cart</h2>
       <button class="close-cart" onclick="toggleCart()">×</button>
     </div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-footer">
       <div class="total-row">
-        <span>Total:</span>
+        <span>Subtotal:</span>
         <span id="cart-total">₹0</span>
       </div>
-      <button class="btn-checkout" onclick="openCheckout()">Proceed to Checkout</button>
+      <button class="btn-checkout" onclick="openCheckout()">Proceed to Buy</button>
     </div>
   </div>
 
-  <!-- CHECKOUT MODAL -->
+  <!-- CHECKOUT MODAL (Authentication Form) -->
   <div class="modal" id="checkout-modal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeCheckout()">×</button>
-      <h2>Checkout Details</h2>
-      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 20px;">Enter your details to order via WhatsApp</p>
+      <h2>Delivery Details</h2>
       
       <form id="checkout-form" onsubmit="submitOrder(event)">
         <div class="input-group">
-          <label>Aapka Naam (Full Name)</label>
-          <input type="text" id="cust-name" required placeholder="Enter your name">
+          <label>Full Name</label>
+          <input type="text" id="cust-name" required placeholder="Enter your full name">
         </div>
         <div class="input-group">
-          <label>WhatsApp Number</label>
+          <label>Mobile Number</label>
           <input type="tel" id="cust-phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
         </div>
         <div class="input-group">
-          <label>Delivery Address</label>
-          <textarea id="cust-address" required placeholder="Enter full address" rows="3"></textarea>
+          <label>Full Address (with Pincode)</label>
+          <textarea id="cust-address" required placeholder="House No, Street, Area, Pincode" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn-submit">Order on WhatsApp ➔</button>
+        <button type="submit" class="btn-submit">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="24" alt="WA"> Order via WhatsApp
+        </button>
       </form>
     </div>
   </div>
 
-  <!-- FLOATING WHATSAPP -->
-  <a href="https://wa.me/916200973301?text=Namaste%2C%20mujhe%20power%20tools%20ke%20baare%20mein%20jaankari%20chahiye" class="float-wa" target="_blank">💬</a>
+  <!-- FLOATING WHATSAPP LOGO -->
+  <a href="https://wa.me/916200973301?text=Namaste%2C%20mujhe%20power%20tools%20ke%20baare%20mein%20jaankari%20chahiye" class="float-wa" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
 
   <!-- JAVASCRIPT -->
   <script>
     const WA_NUMBER = "916200973301";
     
-    // SVG Images (Yeh kabhi break nahi hongi kyunki yeh code hain)
-    const imgGrinder = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="40" width="50" height="20" rx="5" fill="#444"/><rect x="20" y="45" width="10" height="10" fill="#888"/><circle cx="70" cy="50" r="15" fill="#222"/><path d="M70 35 A15 15 0 0 1 85 50 L70 50 Z" fill="#00f3ff"/><rect x="40" y="60" width="10" height="20" rx="2" fill="#333"/></svg>`;
-    const imgDrill = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="30" width="50" height="25" rx="5" fill="#555"/><rect x="10" y="35" width="10" height="15" fill="#888"/><rect x="70" y="38" width="25" height="9" fill="#ccc"/><rect x="40" y="55" width="15" height="30" rx="3" fill="#333"/><circle cx="80" cy="42" r="3" fill="#ffb703"/></svg>`;
-    const imgCutter = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="50" width="40" height="20" rx="5" fill="#444"/><path d="M30 60 L10 80 L20 90 L40 70 Z" fill="#888"/><circle cx="50" cy="60" r="20" fill="none" stroke="#00f3ff" stroke-width="5"/><rect x="45" y="70" width="10" height="25" rx="3" fill="#333"/></svg>`;
-
-    // Product Data
+    // Products with REAL, WORKING image links (Tools theme)
     const products = [
-      { id: 1, name: "Angle Grinder DSM08-100", brand: "Dong Cheng", price: 2199, img: imgGrinder, specs: "800W Motor, 13000 RPM" },
-      { id: 2, name: "Angle Grinder DSM02-125B", brand: "Dong Cheng", price: 3200, img: imgGrinder, specs: "1200W Motor, 11800 RPM" },
-      { id: 3, name: "Marble Cutter DZE03-110", brand: "Dong Cheng", price: 2500, img: imgCutter, specs: "1050W Power, 13300 RPM" },
-      { id: 4, name: "Impact Drill DZJ02-13", brand: "Dong Cheng", price: 1950, img: imgDrill, specs: "500W Motor, 13mm Chuck" },
-      { id: 5, name: "Electric Planer DMB82", brand: "Dong Cheng", price: 2879, img: imgGrinder, specs: "500W Power, 82mm Width" },
-      { id: 6, name: "Electric Planer GC-H82P", brand: "Gaocheng", price: 2430, img: imgGrinder, specs: "710W Motor, 15000 RPM" },
-      { id: 7, name: "Marble Cutter CP-MC-125MB", brand: "Camron Pro", price: 3470, img: imgCutter, specs: "1700W Power, 125mm Blade" },
-      { id: 8, name: "Impact Drill DV 10VST", brand: "Hikoki", price: 2339, img: imgDrill, specs: "500W Motor, 10mm Chuck" }
+      { id: 1, name: "Dong Cheng Angle Grinder DSM08-100", brand: "Dong Cheng", price: 2199, rating: 4.2, img: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" },
+      { id: 2, name: "Dong Cheng Angle Grinder DSM02-125B", brand: "Dong Cheng", price: 3200, rating: 4.5, img: "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=80" },
+      { id: 3, name: "Dong Cheng Marble Cutter DZE03-110", brand: "Dong Cheng", price: 2500, rating: 4.0, img: "https://images.unsplash.com/photo-1581147036324-c1c88bb6b0f4?w=400&q=80" },
+      { id: 4, name: "Dong Cheng Impact Drill DZJ02-13", brand: "Dong Cheng", price: 1950, rating: 4.3, img: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?w=400&q=80" },
+      { id: 5, name: "Dong Cheng Electric Planer DMB82", brand: "Dong Cheng", price: 2879, rating: 4.1, img: "https://images.unsplash.com/photo-1620056378445-0b7e1c7e0b8f?w=400&q=80" },
+      { id: 6, name: "Gaocheng Electric Planer GC-H82P", brand: "Gaocheng", price: 2430, rating: 4.4, img: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80" },
+      { id: 7, name: "Camron Pro Marble Cutter CP-MC-125MB", brand: "Camron Pro", price: 3470, rating: 4.6, img: "https://images.unsplash.com/photo-1581147036324-c1c88bb6b0f4?w=400&q=80" },
+      { id: 8, name: "Hikoki Impact Drill DV 10VST", brand: "Hikoki", price: 2339, rating: 4.8, img: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?w=400&q=80" }
     ];
 
     let cart = [];
@@ -186,13 +260,19 @@
       const grid = document.getElementById("product-grid");
       grid.innerHTML = products.map(p => `
         <div class="card">
-          <div class="card-img">${p.img}</div>
-          <div class="card-body">
-            <span class="brand-tag">${p.brand}</span>
-            <h3>${p.name}</h3>
-            <div class="specs">${p.specs}</div>
-            <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
-            <button class="btn-add" onclick="addToCart(${p.id})">Add to Cart 🛒</button>
+          <div class="card-img">
+            <img src="${p.img}" alt="${p.name}">
+          </div>
+          <div class="brand-tag">${p.brand}</div>
+          <h3 class="card-title">${p.name}</h3>
+          <div class="rating">⭐⭐⭐⭐⭐ (${p.rating})</div>
+          <div class="price-row">
+            <span class="price-symbol">₹</span>
+            <span class="price-whole">${p.price.toLocaleString('en-IN')}</span>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-cart" onclick="addToCart(${p.id})">Add to Cart</button>
+            <button class="btn btn-buy" onclick="buyNow(${p.id})">Buy Now</button>
           </div>
         </div>
       `).join('');
@@ -214,8 +294,15 @@
       }
       updateCartUI();
       if(!document.getElementById('cart-sidebar').classList.contains('active')){
-        toggleCart(); // Open cart automatically
+        toggleCart(); 
       }
+    }
+
+    // Buy Now Logic (Direct Checkout)
+    function buyNow(id) {
+      cart = [{ ...products.find(p => p.id === id), qty: 1 }];
+      updateCartUI();
+      openCheckout();
     }
 
     function removeFromCart(id) {
@@ -232,14 +319,14 @@
       let count = 0;
       
       if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Cart is empty.</p>';
+        cartItemsDiv.innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Your cart is empty.</p>';
       } else {
         cartItemsDiv.innerHTML = cart.map(item => {
           total += item.price * item.qty;
           count += item.qty;
           return `
             <div class="cart-item">
-              <div style="width:50px; height:50px; background:#000; border-radius:5px; overflow:hidden;">${item.img}</div>
+              <img src="${item.img}" alt="${item.name}">
               <div class="cart-item-info">
                 <h4>${item.name}</h4>
                 <p>₹${item.price} x ${item.qty}</p>
@@ -257,7 +344,7 @@
     // Checkout Logic
     function openCheckout() {
       if (cart.length === 0) {
-        alert("Your cart is empty! Please add products first.");
+        alert("Your cart is empty!");
         return;
       }
       toggleCart(); 
@@ -283,7 +370,7 @@
         productListText += `\n${index + 1}. ${item.name} (Qty: ${item.qty}) - ₹${item.price * item.qty}`;
       });
 
-      // WhatsApp Message Format
+      // WhatsApp Message
       const message = `*🏪 Vishwakarma Electrical Workshop*\n\n` +
                       `*👤 Name:* ${name}\n` +
                       `*📱 Phone:* ${phone}\n` +
