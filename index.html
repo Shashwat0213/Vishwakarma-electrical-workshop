@@ -36,22 +36,20 @@
     .logo span { font-size: 0.8rem; color: var(--secondary); display: block; font-weight: 500; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
     
     .search-bar { flex-grow: 1; max-width: 600px; display: flex; height: 45px; border-radius: 8px; overflow: hidden; border: 2px solid transparent; transition: 0.3s; background: var(--white); }
-    .search-bar:focus-within { border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
     .search-bar input { flex-grow: 1; padding: 0 15px; border: none; outline: none; font-size: 1rem; color: var(--text-main); }
-    .search-bar button { background: var(--primary); color: var(--white); border: none; padding: 0 25px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+    .search-bar button { background: var(--primary); color: var(--white); border: none; padding: 0 25px; cursor: pointer; font-weight: 600; }
     
     .nav-icons { display: flex; gap: 25px; align-items: center; }
-    .nav-item { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--white); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: 0.2s; background: none; border: none; }
-    .nav-item:hover { color: var(--secondary); }
+    .nav-item { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--white); text-decoration: none; font-size: 0.9rem; font-weight: 500; background: none; border: none; }
     .nav-item .icon { font-size: 1.4rem; }
     .nav-item .text-wrap { display: flex; flex-direction: column; text-align: left; }
     .nav-item .text-wrap span { font-size: 0.75rem; color: #94a3b8; }
     
-    .cart-btn { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; position: relative; transition: 0.2s; }
+    .cart-btn { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; position: relative; }
     .cart-btn .cart-count { position: absolute; top: -8px; right: -8px; background: var(--primary); color: var(--white); font-size: 0.8rem; font-weight: bold; padding: 2px 7px; border-radius: 50%; }
 
     /* HERO */
-    .hero-banner { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: var(--white); text-align: center; padding: 70px 20px; margin-bottom: 30px; }
+    .hero-banner { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: var(--white); text-align: center; padding: 60px 20px; margin-bottom: 30px; }
     .hero-banner h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
     .hero-banner p { font-size: 1.2rem; color: #cbd5e1; max-width: 600px; margin: 0 auto; }
 
@@ -62,35 +60,38 @@
     /* PRODUCT CARD */
     .card { background: var(--white); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; transition: 0.3s; border: 1px solid var(--border); position: relative; }
     .card:hover { box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1); transform: translateY(-5px); border-color: #cbd5e1; }
-    
     .card-img { width: 100%; height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 20px; background: #f1f5f9; border-radius: 8px; }
     .card-img img { max-width: 90%; max-height: 90%; object-fit: contain; transition: transform 0.5s; mix-blend-mode: multiply; }
     .card:hover .card-img img { transform: scale(1.08); }
-    
-    .brand-tag { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
-    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; line-height: 1.4; color: var(--text-main); }
-    
-    .price-row { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; margin-top: auto; }
-    .price-current { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+    .brand-tag { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }
+    .price-current { font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; margin-top: auto; }
     
     .btn-group { display: flex; flex-direction: column; gap: 10px; }
     .btn { padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: 0.2s; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .btn-cart { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); }
-    .btn-cart:hover { background: #e2e8f0; }
     .btn-buy { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3); }
-    .btn-buy:hover { background: var(--primary-hover); }
 
     /* MODALS */
-    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; }
     .modal.active { opacity: 1; visibility: visible; }
     .modal-content { background: var(--white); width: 90%; max-width: 450px; padding: 30px; border-radius: 16px; position: relative; max-height: 90vh; overflow-y: auto; }
     .close-modal { position: absolute; top: 20px; right: 20px; background: var(--bg-body); border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     
-    .modal-content h2 { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; }
-    .input-group { margin-bottom: 20px; }
+    .modal-content h2 { margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; text-align: center; }
+    .input-group { margin-bottom: 15px; }
     .input-group label { display: block; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; }
     .input-group input, .input-group textarea { width: 100%; padding: 12px 15px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 1rem; }
     .btn-submit { width: 100%; background: var(--primary); color: var(--white); font-size: 1.1rem; padding: 15px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    
+    .auth-divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: var(--text-muted); }
+    .auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
+    .auth-divider::before { margin-right: 10px; }
+    .auth-divider::after { margin-left: 10px; }
+    
+    .btn-google { background: #db4437; color: white; margin-top: 10px; }
+    .btn-phone { background: var(--whatsapp); color: white; }
+    .btn-switch { background: none; border: none; color: var(--primary); font-weight: 600; cursor: pointer; text-decoration: underline; margin-top: 15px; width: 100%; }
 
     /* CART SIDEBAR */
     .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px); z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
@@ -106,7 +107,7 @@
     .total-row { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; }
     .btn-checkout { width: 100%; background: var(--whatsapp); color: var(--white); padding: 15px; font-size: 1.1rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; }
 
-    .float-wa { position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(37,211,102,0.3); z-index: 500; transition: 0.3s; }
+    .float-wa { position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(37,211,102,0.3); z-index: 500; }
     .float-wa img { width: 35px; height: 35px; }
 
     @media (max-width: 768px) {
@@ -115,12 +116,58 @@
       .nav-item .text-wrap { display: none; }
       .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
       .card-img { height: 150px; }
-      .cart-sidebar { max-width: 100%; }
+      .hero-banner h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- WELCOME / LOGIN POPUP ON START -->
+  <div class="modal active" id="welcome-modal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+      <h2 style="color: var(--primary);">Welcome to Vishwakarma Workshop!</h2>
+      <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 1rem;">Aapka hamari dukaan par swagat hai. Shopping shuru karne ke liye kripya login karein.</p>
+      
+      <!-- LOGIN/SIGNUP FORM -->
+      <div id="auth-forms">
+        <!-- Email/Password Form -->
+        <form id="email-auth-form" onsubmit="handleEmailAuth(event)" style="display: block;">
+          <div class="input-group" id="name-group" style="display: none;">
+            <input type="text" id="auth-name" placeholder="Full Name">
+          </div>
+          <div class="input-group">
+            <input type="email" id="auth-email" required placeholder="Email ID">
+          </div>
+          <div class="input-group">
+            <input type="password" id="auth-password" required placeholder="Password (min 6 chars)">
+          </div>
+          <button type="submit" class="btn btn-submit" id="email-auth-btn">Sign In</button>
+        </form>
+
+        <!-- Phone OTP Form -->
+        <form id="phone-auth-form" onsubmit="handlePhoneAuth(event)" style="display: none;">
+          <div class="input-group">
+            <input type="tel" id="phone-number" required placeholder="+91XXXXXXXXXX" value="+91">
+          </div>
+          <div class="input-group" id="otp-group" style="display: none;">
+            <input type="text" id="phone-otp" placeholder="Enter OTP">
+          </div>
+          <button type="submit" class="btn btn-submit btn-phone" id="phone-auth-btn">Send OTP</button>
+        </form>
+
+        <div class="auth-divider">OR</div>
+        
+        <button class="btn btn-submit btn-google" onclick="handleGoogleAuth()">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" alt="G"> Continue with Google
+        </button>
+        
+        <button class="btn-switch" onclick="switchAuthMethod()" id="auth-switch-btn">Login with Phone Number</button>
+        <button class="btn-switch" onclick="toggleEmailMode()" id="auth-toggle-text" style="display: none;">New user? Create an account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
   <header>
     <div class="top-nav">
       <a href="#" class="logo">Vishwakarma <span>Electrical Workshop</span></a>
@@ -131,8 +178,7 @@
       </div>
 
       <div class="nav-icons">
-        <!-- LOGIN BUTTON - YEH PAKKA DIKHEGA -->
-        <button class="nav-item" onclick="openAuthModal()" style="background:none; border:none;">
+        <button class="nav-item" onclick="openAuthModal()">
           <span class="icon">👤</span>
           <div class="text-wrap" id="user-profile">
             <span>Hello, Sign in</span>
@@ -155,35 +201,7 @@
   </div>
 
   <div class="container" id="products">
-    <div class="grid" id="product-grid">
-      <p style="grid-column: 1/-1; text-align: center; color: #64748b; font-size: 1.2rem;">Loading products...</p>
-    </div>
-  </div>
-
-  <!-- AUTH MODAL (LOGIN/SIGNUP) -->
-  <div class="modal" id="auth-modal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeAuthModal()">×</button>
-      <h2 id="auth-title">Sign In</h2>
-      <form id="auth-form" onsubmit="handleAuth(event)">
-        <div class="input-group" id="name-group" style="display: none;">
-          <label>Full Name</label>
-          <input type="text" id="auth-name" placeholder="Enter your name">
-        </div>
-        <div class="input-group">
-          <label>Email ID</label>
-          <input type="email" id="auth-email" required placeholder="Enter your email">
-        </div>
-        <div class="input-group">
-          <label>Password</label>
-          <input type="password" id="auth-password" required placeholder="Min 6 characters">
-        </div>
-        <button type="submit" class="btn-submit" id="auth-btn">Sign In</button>
-        <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
-          <a href="javascript:void(0)" onclick="toggleAuthMode()" style="color: var(--primary); font-weight: 600;" id="auth-toggle-text">New user? Create an account</a>
-        </p>
-      </form>
-    </div>
+    <div class="grid" id="product-grid"></div>
   </div>
 
   <!-- CHECKOUT MODAL -->
@@ -233,7 +251,7 @@
   </a>
 
   <script>
-    // FIREBASE CONFIG
+    // 1. FIREBASE CONFIG
     const firebaseConfig = {
       apiKey: "AIzaSyBEeJ2KGb6rEnW7imAb_tDyms6bNYaBBQw",
       authDomain: "shop-dbe04.firebaseapp.com",
@@ -244,7 +262,6 @@
       measurementId: "G-MXK092100Z"
     };
 
-    // INIT FIREBASE
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
@@ -252,41 +269,34 @@
     const WA_NUMBER = "916200973301";
     let cart = [];
     let allProducts = [];
+    let isLoginMode = true; // Email mode default
+    let isPhoneMode = false;
+    let confirmationResult = null;
 
-    // --- RELIABLE PRODUCT IMAGES (STOCK) ---
-    // In links ko maine reliable sources se liya hai.
+    // 2. PRODUCTS DATA (Only 4 Products as requested)
     const stockImages = {
       grinder: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=80",
-      drill: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?w=400&q=80",
-      cutter: "https://images.unsplash.com/photo-1581147036324-c1c88bb6b0f4?w=400&q=80",
-      planer: "https://images.unsplash.com/photo-1620056378445-0b7e1c7e0b8f?w=400&q=80"
+      drill: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?w=400&q=80"
     };
 
-    // Agar Firebase empty hai, toh yeh fallback products dikhenge
     const fallbackProducts = [
       { id: "1", name: "Dong Cheng Angle Grinder DSM08-100", brand: "Dong Cheng", price: 2199, img: stockImages.grinder },
       { id: "2", name: "Dong Cheng Angle Grinder DSM02-125B", brand: "Dong Cheng", price: 3200, img: stockImages.grinder },
-      { id: "3", name: "Dong Cheng Marble Cutter DZE03-110", brand: "Dong Cheng", price: 2500, img: stockImages.cutter },
-      { id: "4", name: "Dong Cheng Impact Drill DZJ02-13", brand: "Dong Cheng", price: 1950, img: stockImages.drill },
-      { id: "5", name: "Dong Cheng Electric Planer DMB82", brand: "Dong Cheng", price: 2879, img: stockImages.planer }
+      { id: "3", name: "Dong Cheng Impact Drill DZJ02-13", brand: "Dong Cheng", price: 1950, img: stockImages.drill },
+      { id: "4", name: "Hikoki Impact Drill DV 10VST", brand: "Hikoki", price: 2339, img: stockImages.drill }
     ];
 
-    // --- FETCH PRODUCTS ---
+    // 3. FETCH & RENDER PRODUCTS
     async function fetchProducts() {
-      const grid = document.getElementById("product-grid");
       try {
         const snapshot = await db.collection("products").get();
         if (snapshot.empty) {
-          // Agar database khaali hai, toh fallback use karo
           allProducts = fallbackProducts;
-          renderProducts(allProducts);
-          return;
+        } else {
+          allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         }
-        allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         renderProducts(allProducts);
       } catch (error) {
-        console.error("Error:", error);
-        // Error aane par bhi fallback dikhao
         allProducts = fallbackProducts;
         renderProducts(allProducts);
       }
@@ -301,7 +311,7 @@
           <div class="card-img"><img src="${p.img || stockImages.grinder}" alt="${p.name}"></div>
           <div class="brand-tag">${p.brand || 'Brand'}</div>
           <h3 class="card-title">${p.name}</h3>
-          <div class="price-row"><span class="price-current">₹${p.price.toLocaleString('en-IN')}</span></div>
+          <div class="price-current">₹${p.price.toLocaleString('en-IN')}</div>
           <div class="btn-group">
             <button class="btn btn-cart" onclick="addToCart('${p.id}')">Add to Cart</button>
             <button class="btn btn-buy" onclick="buyNow('${p.id}')">Buy Now</button>
@@ -316,24 +326,35 @@
       renderProducts(filtered);
     }
 
-    // --- AUTHENTICATION LOGIC (FIXED) ---
-    let isLoginMode = true;
-    
-    function openAuthModal() {
-      document.getElementById('auth-modal').classList.add('active');
+    // 4. AUTHENTICATION LOGIC
+    function switchAuthMethod() {
+      isPhoneMode = !isPhoneMode;
+      const emailForm = document.getElementById('email-auth-form');
+      const phoneForm = document.getElementById('phone-auth-form');
+      const switchBtn = document.getElementById('auth-switch-btn');
+      const toggleText = document.getElementById('auth-toggle-text');
+
+      if (isPhoneMode) {
+        emailForm.style.display = 'none';
+        phoneForm.style.display = 'block';
+        switchBtn.innerText = 'Login with Email/Password';
+        toggleText.style.display = 'none';
+      } else {
+        emailForm.style.display = 'block';
+        phoneForm.style.display = 'none';
+        switchBtn.innerText = 'Login with Phone Number';
+        if (!isLoginMode) toggleText.style.display = 'block';
+      }
     }
-    function closeAuthModal() {
-      document.getElementById('auth-modal').classList.remove('active');
-    }
-    function toggleAuthMode() {
+
+    function toggleEmailMode() {
       isLoginMode = !isLoginMode;
-      document.getElementById('auth-title').innerText = isLoginMode ? "Sign In" : "Create Account";
-      document.getElementById('auth-btn').innerText = isLoginMode ? "Sign In" : "Sign Up";
+      document.getElementById('email-auth-btn').innerText = isLoginMode ? "Sign In" : "Sign Up";
       document.getElementById('auth-toggle-text').innerText = isLoginMode ? "New user? Create an account" : "Already have an account? Sign In";
       document.getElementById('name-group').style.display = isLoginMode ? "none" : "block";
     }
 
-    async function handleAuth(e) {
+    async function handleEmailAuth(e) {
       e.preventDefault();
       const email = document.getElementById('auth-email').value;
       const password = document.getElementById('auth-password').value;
@@ -342,31 +363,65 @@
       try {
         if (isLoginMode) {
           await auth.signInWithEmailAndPassword(email, password);
-          alert("Login Successful!");
         } else {
           const userCredential = await auth.createUserWithEmailAndPassword(email, password);
           await userCredential.user.updateProfile({ displayName: name });
-          await db.collection("users").doc(userCredential.user.uid).set({ name: name, email: email, createdAt: new Date() });
-          alert("Account Created!");
         }
-        closeAuthModal();
-      } catch (error) {
-        alert("Error: " + error.message);
+        closeWelcomeModal();
+      } catch (error) { alert("Error: " + error.message); }
+    }
+
+    // Phone Auth Logic
+    async function handlePhoneAuth(e) {
+      e.preventDefault();
+      const phoneNumber = document.getElementById('phone-number').value;
+      const otpBtn = document.getElementById('phone-auth-btn');
+      
+      if (otpBtn.innerText === "Send OTP") {
+        try {
+          // Setup reCAPTCHA (invisible for phone auth)
+          window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('phone-auth-btn', { 'size': 'invisible' });
+          confirmationResult = await auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
+          document.getElementById('otp-group').style.display = 'block';
+          otpBtn.innerText = "Verify OTP";
+        } catch (error) { alert("Error sending OTP: " + error.message); }
+      } else {
+        const otp = document.getElementById('phone-otp').value;
+        try {
+          await confirmationResult.confirm(otp);
+          closeWelcomeModal();
+        } catch (error) { alert("Invalid OTP!"); }
       }
     }
 
-    // Auth State Listener
+    // Google Auth Logic
+    function handleGoogleAuth() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(() => closeWelcomeModal())
+        .catch((error) => alert("Google Sign-In Failed: " + error.message));
+    }
+
+    function closeWelcomeModal() {
+      document.getElementById('welcome-modal').classList.remove('active');
+    }
+    function openAuthModal() {
+      document.getElementById('welcome-modal').classList.add('active');
+    }
+
+    // Auth State Listener (Updates Header)
     auth.onAuthStateChanged(user => {
       const profileDiv = document.getElementById('user-profile');
       if (user) {
-        const displayName = user.displayName || user.email.split('@')[0];
+        const displayName = user.displayName || user.phoneNumber || user.email.split('@')[0];
         profileDiv.innerHTML = `<span>Hello, ${displayName}</span><strong style="font-size: 0.95rem;">My Account</strong>`;
+        closeWelcomeModal(); // Auto close if already logged in
       } else {
         profileDiv.innerHTML = `<span>Hello, Sign in</span><strong style="font-size: 0.95rem;">Account</strong>`;
       }
     });
 
-    // --- CART LOGIC ---
+    // 5. CART LOGIC
     function toggleCart() {
       document.getElementById('cart-sidebar').classList.toggle('active');
       document.getElementById('cart-overlay').classList.toggle('active');
@@ -426,12 +481,15 @@
       cartTotal.innerText = `₹${total.toLocaleString('en-IN')}`;
     }
 
-    // --- CHECKOUT ---
+    // 6. CHECKOUT
     function openCheckout() {
       if (cart.length === 0) { alert("Your cart is empty!"); return; }
       toggleCart(); 
       const user = auth.currentUser;
-      if (user) document.getElementById('cust-name').value = user.displayName || '';
+      if (user) {
+        document.getElementById('cust-name').value = user.displayName || '';
+        if(user.phoneNumber) document.getElementById('cust-phone').value = user.phoneNumber.replace('+91','');
+      }
       document.getElementById('checkout-modal').classList.add('active');
     }
 
@@ -469,8 +527,10 @@
       updateCartUI();
       closeCheckout();
       document.getElementById('checkout-form').reset();
+      alert("Thank you for your order! Aapki details humein mil gayi hain.");
     }
 
+    // Initialize
     document.addEventListener("DOMContentLoaded", () => {
       fetchProducts();
       updateCartUI();
