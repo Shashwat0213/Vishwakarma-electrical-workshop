@@ -3,20 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vishwakarma Electrical Workshop | Power Tools & Repair</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <title>Vishwakarma Electrical Workshop | Power Tools</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: #13131f;
+      --primary: #00f3ff;
+      --text: #ffffff;
+      --muted: #a0a0b0;
+      --border: rgba(255,255,255,0.1);
+      --whatsapp: #25D366;
+      --yellow: #ffb703;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+    /* HEADER */
+    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; border-bottom: 1px solid var(--border); background: rgba(10, 10, 15, 0.9); position: sticky; top: 0; z-index: 100; }
+    .logo { font-weight: 800; font-size: 1.2rem; }
+    .logo span { display: block; font-size: 0.8rem; color: var(--primary); font-weight: 400; }
+    nav { display: flex; align-items: center; gap: 15px; }
+    nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    nav a:hover { color: var(--primary); }
+    .cart-btn { background: rgba(0, 243, 255, 0.1); border: 1px solid var(--primary); color: var(--primary); padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 5px; }
+    .cart-btn span { background: var(--primary); color: #000; padding: 2px 8px; border-radius: 50%; font-size: 0.8rem; font-weight: bold; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 60px 20px; background: linear-gradient(to bottom, #13131f, #0a0a0f); }
+    .hero h1 { font-size: 2.5rem; margin: 15px 0; }
+    .glow-text { color: var(--primary); text-shadow: 0 0 15px rgba(0, 243, 255, 0.5); }
+
+    /* PRODUCTS */
+    section { padding: 40px 5%; max-width: 1200px; margin: auto; }
+    .section-title { font-size: 2rem; text-align: center; margin-bottom: 30px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: 0.3s; }
+    .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1); }
+    .card-img { height: 200px; background: #000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .card-img svg { width: 100%; height: 100%; object-fit: contain; }
+    .card-body { padding: 20px; }
+    .brand-tag { color: var(--primary); font-size: 0.8rem; text-transform: uppercase; font-weight: 600; }
+    .card-body h3 { margin: 5px 0 15px; font-size: 1.2rem; }
+    .specs { font-size: 0.85rem; color: var(--muted); margin-bottom: 15px; }
+    .price { font-size: 1.4rem; font-weight: 800; color: var(--yellow); margin-bottom: 15px; }
+    .btn-add { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+    .btn-add:hover { background: var(--primary); color: #000; }
+
+    /* CART SIDEBAR */
+    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .cart-overlay.active { opacity: 1; visibility: visible; }
+    .cart-sidebar { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100%; background: var(--card); z-index: 1001; transition: 0.3s; display: flex; flex-direction: column; border-left: 1px solid var(--border); }
+    .cart-sidebar.active { right: 0; }
+    .cart-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .close-cart { background: none; border: none; color: var(--text); font-size: 2rem; cursor: pointer; }
+    .cart-items { flex-grow: 1; padding: 20px; overflow-y: auto; }
+    .cart-item { display: flex; gap: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; align-items: center; border: 1px solid #222; }
+    .cart-item-info h4 { font-size: 0.9rem; margin-bottom: 5px; }
+    .cart-item-info p { font-size: 0.8rem; color: var(--muted); }
+    .remove-item { background: none; border: none; color: #ff0055; font-size: 1.5rem; cursor: pointer; margin-left: auto; }
+    .cart-footer { padding: 20px; border-top: 1px solid var(--border); background: #0a0a0f; }
+    .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; color: var(--yellow); }
+    .btn-checkout { width: 100%; background: var(--whatsapp); color: #000; padding: 15px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+    .btn-checkout:hover { background: #1da851; }
+
+    /* MODAL (Checkout Form) */
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .modal.active { opacity: 1; visibility: visible; }
+    .modal-content { background: var(--card); width: 90%; max-width: 450px; padding: 30px; border-radius: 16px; border: 1px solid var(--border); position: relative; max-height: 90vh; overflow-y: auto; }
+    .close-modal { position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--text); font-size: 2rem; cursor: pointer; }
+    .modal-content h2 { margin-bottom: 20px; color: var(--primary); }
+    .input-group { margin-bottom: 15px; }
+    .input-group label { display: block; font-size: 0.9rem; margin-bottom: 5px; color: var(--muted); }
+    .input-group input, .input-group textarea { width: 100%; padding: 12px; background: #0a0a0f; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 1rem; }
+    .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--primary); }
+    .btn-submit { width: 100%; background: var(--whatsapp); color: #000; font-size: 1.1rem; padding: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+
+    /* FLOATING WHATSAPP */
+    .float-wa { position: fixed; bottom: 20px; right: 20px; background: var(--whatsapp); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; text-decoration: none; box-shadow: 0 5px 20px rgba(37,211,102,0.4); z-index: 500; }
+    
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .cart-sidebar { max-width: 100%; }
+    }
+  </style>
 </head>
 <body>
 
   <!-- HEADER -->
-  <header id="header">
+  <header>
     <div class="logo">Vishwakarma <span>Electrical Workshop</span></div>
     <nav>
-      <a href="#products">Products</a>
-      <a href="#contact">Contact</a>
-      <!-- Cart Button -->
-      <button id="cart-btn" class="cart-btn" onclick="toggleCart()">
+      <button class="cart-btn" onclick="toggleCart()">
         🛒 Cart <span id="cart-count">0</span>
       </button>
     </nav>
@@ -24,87 +103,57 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-content">
-      <span class="badge">Koderma's #1 Power Tool Store</span>
-      <h1>Power Up Your <span class="glow-text">Work</span></h1>
-      <p>Premium Power Tools & Expert Repair Service. Order multiple items directly via WhatsApp.</p>
-      <a href="#products" class="btn btn-neon">Explore Tools</a>
-    </div>
+    <h1>Power Up Your <span class="glow-text">Work</span></h1>
+    <p style="color: var(--muted); margin-bottom: 20px;">Premium Power Tools in Koderma</p>
   </div>
 
   <!-- PRODUCTS -->
   <section id="products">
-    <h2 class="section-title">Our <span class="glow-text">Arsenal</span></h2>
+    <h2 class="section-title">Our Products</h2>
     <div class="grid" id="product-grid"></div>
   </section>
 
   <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
   <div class="cart-sidebar" id="cart-sidebar">
     <div class="cart-header">
       <h2>Your Cart 🛒</h2>
       <button class="close-cart" onclick="toggleCart()">×</button>
     </div>
-    <div class="cart-items" id="cart-items">
-      <!-- Items render here -->
-    </div>
+    <div class="cart-items" id="cart-items"></div>
     <div class="cart-footer">
       <div class="total-row">
         <span>Total:</span>
         <span id="cart-total">₹0</span>
       </div>
-      <button class="btn btn-checkout" onclick="openCheckout()">Proceed to Checkout</button>
+      <button class="btn-checkout" onclick="openCheckout()">Proceed to Checkout</button>
     </div>
   </div>
-  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
 
   <!-- CHECKOUT MODAL -->
   <div class="modal" id="checkout-modal">
     <div class="modal-content">
       <button class="close-modal" onclick="closeCheckout()">×</button>
-      <h2>Complete Your Order</h2>
-      <p class="subtitle">Please enter your details for delivery.</p>
+      <h2>Checkout Details</h2>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 20px;">Enter your details to order via WhatsApp</p>
       
       <form id="checkout-form" onsubmit="submitOrder(event)">
         <div class="input-group">
-          <label>Full Name (Aapka Naam)</label>
+          <label>Aapka Naam (Full Name)</label>
           <input type="text" id="cust-name" required placeholder="Enter your name">
         </div>
         <div class="input-group">
           <label>WhatsApp Number</label>
-          <input type="tel" id="cust-phone" required placeholder="Enter 10-digit number" pattern="[0-9]{10}">
+          <input type="tel" id="cust-phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
         </div>
         <div class="input-group">
           <label>Delivery Address</label>
           <textarea id="cust-address" required placeholder="Enter full address" rows="3"></textarea>
         </div>
-        
-        <div class="payment-info">
-          <strong>Payment Method: Pay via UPI / Bank Transfer</strong>
-          <p>After clicking 'Order on WhatsApp', you will receive our UPI ID to make the payment.</p>
-        </div>
-
-        <button type="submit" class="btn btn-submit">Order on WhatsApp</button>
+        <button type="submit" class="btn-submit">Order on WhatsApp ➔</button>
       </form>
     </div>
   </div>
-
-  <!-- CONTACT -->
-  <section id="contact" class="contact-section">
-    <h2 class="section-title">Get In <span class="glow-text">Touch</span></h2>
-    <div class="contact-grid">
-      <div class="glass-card">
-        <h3>📍 Address</h3>
-        <p>Ranchi-Patna Road, Near Electricity Office, Punjabi Mohalla, Koderma, Jharkhand – 825410</p>
-      </div>
-      <div class="glass-card">
-        <h3>📱 Contact</h3>
-        <p><a href="https://wa.me/916200973301" target="_blank">+91 6200973301</a></p>
-        <p>Mon - Sat: 9AM - 8PM</p>
-      </div>
-    </div>
-  </section>
-
-  <footer><p>© 2026 Vishwakarma Electrical Workshop | Built by Codeligo</p></footer>
 
   <!-- FLOATING WHATSAPP -->
   <a href="https://wa.me/916200973301?text=Namaste%2C%20mujhe%20power%20tools%20ke%20baare%20mein%20jaankari%20chahiye" class="float-wa" target="_blank">💬</a>
@@ -113,16 +162,21 @@
   <script>
     const WA_NUMBER = "916200973301";
     
-    // Product Data (No broken links)
+    // SVG Images (Yeh kabhi break nahi hongi kyunki yeh code hain)
+    const imgGrinder = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="40" width="50" height="20" rx="5" fill="#444"/><rect x="20" y="45" width="10" height="10" fill="#888"/><circle cx="70" cy="50" r="15" fill="#222"/><path d="M70 35 A15 15 0 0 1 85 50 L70 50 Z" fill="#00f3ff"/><rect x="40" y="60" width="10" height="20" rx="2" fill="#333"/></svg>`;
+    const imgDrill = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="30" width="50" height="25" rx="5" fill="#555"/><rect x="10" y="35" width="10" height="15" fill="#888"/><rect x="70" y="38" width="25" height="9" fill="#ccc"/><rect x="40" y="55" width="15" height="30" rx="3" fill="#333"/><circle cx="80" cy="42" r="3" fill="#ffb703"/></svg>`;
+    const imgCutter = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="50" width="40" height="20" rx="5" fill="#444"/><path d="M30 60 L10 80 L20 90 L40 70 Z" fill="#888"/><circle cx="50" cy="60" r="20" fill="none" stroke="#00f3ff" stroke-width="5"/><rect x="45" y="70" width="10" height="25" rx="3" fill="#333"/></svg>`;
+
+    // Product Data
     const products = [
-      { id: 1, name: "Angle Grinder DSM08-100", brand: "Dong Cheng", price: 2199, image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=600" },
-      { id: 2, name: "Angle Grinder DSM02-125B", brand: "Dong Cheng", price: 3200, image: "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?q=80&w=600" },
-      { id: 3, name: "Marble Cutter DZE03-110", brand: "Dong Cheng", price: 2500, image: "https://images.unsplash.com/photo-1581147036324-c1c88bb6b0f4?q=80&w=600" },
-      { id: 4, name: "Impact Drill DZJ02-13", brand: "Dong Cheng", price: 1950, image: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?q=80&w=600" },
-      { id: 5, name: "Electric Planer DMB82", brand: "Dong Cheng", price: 2879, image: "https://images.unsplash.com/photo-1620056378445-0b7e1c7e0b8f?q=80&w=600" },
-      { id: 6, name: "Electric Planer GC-H82P", brand: "Gaocheng", price: 2430, image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=600" },
-      { id: 7, name: "Marble Cutter CP-MC-125MB", brand: "Camron Pro", price: 3470, image: "https://images.unsplash.com/photo-1581147036324-c1c88bb6b0f4?q=80&w=600" },
-      { id: 8, name: "Impact Drill DV 10VST", brand: "Hikoki", price: 2339, image: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?q=80&w=600" }
+      { id: 1, name: "Angle Grinder DSM08-100", brand: "Dong Cheng", price: 2199, img: imgGrinder, specs: "800W Motor, 13000 RPM" },
+      { id: 2, name: "Angle Grinder DSM02-125B", brand: "Dong Cheng", price: 3200, img: imgGrinder, specs: "1200W Motor, 11800 RPM" },
+      { id: 3, name: "Marble Cutter DZE03-110", brand: "Dong Cheng", price: 2500, img: imgCutter, specs: "1050W Power, 13300 RPM" },
+      { id: 4, name: "Impact Drill DZJ02-13", brand: "Dong Cheng", price: 1950, img: imgDrill, specs: "500W Motor, 13mm Chuck" },
+      { id: 5, name: "Electric Planer DMB82", brand: "Dong Cheng", price: 2879, img: imgGrinder, specs: "500W Power, 82mm Width" },
+      { id: 6, name: "Electric Planer GC-H82P", brand: "Gaocheng", price: 2430, img: imgGrinder, specs: "710W Motor, 15000 RPM" },
+      { id: 7, name: "Marble Cutter CP-MC-125MB", brand: "Camron Pro", price: 3470, img: imgCutter, specs: "1700W Power, 125mm Blade" },
+      { id: 8, name: "Impact Drill DV 10VST", brand: "Hikoki", price: 2339, img: imgDrill, specs: "500W Motor, 10mm Chuck" }
     ];
 
     let cart = [];
@@ -132,10 +186,11 @@
       const grid = document.getElementById("product-grid");
       grid.innerHTML = products.map(p => `
         <div class="card">
-          <div class="card-img"><img src="${p.image}" alt="${p.name}"></div>
+          <div class="card-img">${p.img}</div>
           <div class="card-body">
             <span class="brand-tag">${p.brand}</span>
             <h3>${p.name}</h3>
+            <div class="specs">${p.specs}</div>
             <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
             <button class="btn-add" onclick="addToCart(${p.id})">Add to Cart 🛒</button>
           </div>
@@ -158,9 +213,8 @@
         cart.push({ ...product, qty: 1 });
       }
       updateCartUI();
-      // Open cart on add
       if(!document.getElementById('cart-sidebar').classList.contains('active')){
-        toggleCart();
+        toggleCart(); // Open cart automatically
       }
     }
 
@@ -178,14 +232,14 @@
       let count = 0;
       
       if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Your cart is empty.</p>';
+        cartItemsDiv.innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Cart is empty.</p>';
       } else {
         cartItemsDiv.innerHTML = cart.map(item => {
           total += item.price * item.qty;
           count += item.qty;
           return `
             <div class="cart-item">
-              <img src="${item.image}" alt="${item.name}">
+              <div style="width:50px; height:50px; background:#000; border-radius:5px; overflow:hidden;">${item.img}</div>
               <div class="cart-item-info">
                 <h4>${item.name}</h4>
                 <p>₹${item.price} x ${item.qty}</p>
@@ -203,10 +257,10 @@
     // Checkout Logic
     function openCheckout() {
       if (cart.length === 0) {
-        alert("Aapka cart khaali hai! Pehle products add karein.");
+        alert("Your cart is empty! Please add products first.");
         return;
       }
-      toggleCart(); // Close cart
+      toggleCart(); 
       document.getElementById('checkout-modal').classList.add('active');
     }
 
@@ -226,12 +280,12 @@
       
       cart.forEach((item, index) => {
         total += item.price * item.qty;
-        productListText += `\n${index + 1}. *${item.name}* (Qty: ${item.qty}) - ₹${item.price * item.qty}`;
+        productListText += `\n${index + 1}. ${item.name} (Qty: ${item.qty}) - ₹${item.price * item.qty}`;
       });
 
-      // Beautifully Formatted WhatsApp Message
-      const message = `*🏪 Vishwakarma Electrical Workshop - New Order*\n\n` +
-                      `*👤 Customer Name:* ${name}\n` +
+      // WhatsApp Message Format
+      const message = `*🏪 Vishwakarma Electrical Workshop*\n\n` +
+                      `*👤 Name:* ${name}\n` +
                       `*📱 Phone:* ${phone}\n` +
                       `*📍 Address:* ${address}\n\n` +
                       `*🛒 Order Details:*${productListText}\n\n` +
