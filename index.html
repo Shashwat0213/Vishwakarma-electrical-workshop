@@ -8,29 +8,87 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- HEADER -->
   <header id="header">
     <div class="logo">Vishwakarma <span>Electrical Workshop</span></div>
     <nav>
       <a href="#products">Products</a>
-      <a href="#repair">Repair</a>
       <a href="#contact">Contact</a>
+      <!-- Cart Button -->
+      <button id="cart-btn" class="cart-btn" onclick="toggleCart()">
+        🛒 Cart <span id="cart-count">0</span>
+      </button>
     </nav>
   </header>
 
+  <!-- HERO -->
   <div class="hero">
     <div class="hero-content">
       <span class="badge">Koderma's #1 Power Tool Store</span>
       <h1>Power Up Your <span class="glow-text">Work</span></h1>
-      <p>Premium Power Tools, Heavy Duty Machines & Expert Repair Service. Order online or WhatsApp us directly.</p>
+      <p>Premium Power Tools & Expert Repair Service. Order multiple items directly via WhatsApp.</p>
       <a href="#products" class="btn btn-neon">Explore Tools</a>
     </div>
   </div>
 
+  <!-- PRODUCTS -->
   <section id="products">
     <h2 class="section-title">Our <span class="glow-text">Arsenal</span></h2>
     <div class="grid" id="product-grid"></div>
   </section>
 
+  <!-- CART SIDEBAR -->
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h2>Your Cart 🛒</h2>
+      <button class="close-cart" onclick="toggleCart()">×</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- Items render here -->
+    </div>
+    <div class="cart-footer">
+      <div class="total-row">
+        <span>Total:</span>
+        <span id="cart-total">₹0</span>
+      </div>
+      <button class="btn btn-checkout" onclick="openCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal" id="checkout-modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeCheckout()">×</button>
+      <h2>Complete Your Order</h2>
+      <p class="subtitle">Please enter your details for delivery.</p>
+      
+      <form id="checkout-form" onsubmit="submitOrder(event)">
+        <div class="input-group">
+          <label>Full Name (Aapka Naam)</label>
+          <input type="text" id="cust-name" required placeholder="Enter your name">
+        </div>
+        <div class="input-group">
+          <label>WhatsApp Number</label>
+          <input type="tel" id="cust-phone" required placeholder="Enter 10-digit number" pattern="[0-9]{10}">
+        </div>
+        <div class="input-group">
+          <label>Delivery Address</label>
+          <textarea id="cust-address" required placeholder="Enter full address" rows="3"></textarea>
+        </div>
+        
+        <div class="payment-info">
+          <strong>Payment Method: Pay via UPI / Bank Transfer</strong>
+          <p>After clicking 'Order on WhatsApp', you will receive our UPI ID to make the payment.</p>
+        </div>
+
+        <button type="submit" class="btn btn-submit">Order on WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
   <section id="contact" class="contact-section">
     <h2 class="section-title">Get In <span class="glow-text">Touch</span></h2>
     <div class="contact-grid">
@@ -40,17 +98,161 @@
       </div>
       <div class="glass-card">
         <h3>📱 Contact</h3>
-        <p><a href="https://wa.me/916200973301">+91 6200973301</a></p>
+        <p><a href="https://wa.me/916200973301" target="_blank">+91 6200973301</a></p>
         <p>Mon - Sat: 9AM - 8PM</p>
       </div>
     </div>
   </section>
 
-  <footer><p>© 2026 Vishwakarma Electrical Workshop</p></footer>
+  <footer><p>© 2026 Vishwakarma Electrical Workshop | Built by Codeligo</p></footer>
 
+  <!-- FLOATING WHATSAPP -->
   <a href="https://wa.me/916200973301?text=Namaste%2C%20mujhe%20power%20tools%20ke%20baare%20mein%20jaankari%20chahiye" class="float-wa" target="_blank">💬</a>
 
-  <script src="products.js"></script>
-  <script src="script.js"></script>
+  <!-- JAVASCRIPT -->
+  <script>
+    const WA_NUMBER = "916200973301";
+    
+    // Product Data (No broken links)
+    const products = [
+      { id: 1, name: "Angle Grinder DSM08-100", brand: "Dong Cheng", price: 2199, image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=600" },
+      { id: 2, name: "Angle Grinder DSM02-125B", brand: "Dong Cheng", price: 3200, image: "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?q=80&w=600" },
+      { id: 3, name: "Marble Cutter DZE03-110", brand: "Dong Cheng", price: 2500, image: "https://images.unsplash.com/photo-1581147036324-c1c88bb6b0f4?q=80&w=600" },
+      { id: 4, name: "Impact Drill DZJ02-13", brand: "Dong Cheng", price: 1950, image: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?q=80&w=600" },
+      { id: 5, name: "Electric Planer DMB82", brand: "Dong Cheng", price: 2879, image: "https://images.unsplash.com/photo-1620056378445-0b7e1c7e0b8f?q=80&w=600" },
+      { id: 6, name: "Electric Planer GC-H82P", brand: "Gaocheng", price: 2430, image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=600" },
+      { id: 7, name: "Marble Cutter CP-MC-125MB", brand: "Camron Pro", price: 3470, image: "https://images.unsplash.com/photo-1581147036324-c1c88bb6b0f4?q=80&w=600" },
+      { id: 8, name: "Impact Drill DV 10VST", brand: "Hikoki", price: 2339, image: "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?q=80&w=600" }
+    ];
+
+    let cart = [];
+
+    // Render Products
+    function renderProducts() {
+      const grid = document.getElementById("product-grid");
+      grid.innerHTML = products.map(p => `
+        <div class="card">
+          <div class="card-img"><img src="${p.image}" alt="${p.name}"></div>
+          <div class="card-body">
+            <span class="brand-tag">${p.brand}</span>
+            <h3>${p.name}</h3>
+            <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+            <button class="btn-add" onclick="addToCart(${p.id})">Add to Cart 🛒</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Cart Logic
+    function toggleCart() {
+      document.getElementById('cart-sidebar').classList.toggle('active');
+      document.getElementById('cart-overlay').classList.toggle('active');
+    }
+
+    function addToCart(id) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.qty += 1;
+      } else {
+        const product = products.find(p => p.id === id);
+        cart.push({ ...product, qty: 1 });
+      }
+      updateCartUI();
+      // Open cart on add
+      if(!document.getElementById('cart-sidebar').classList.contains('active')){
+        toggleCart();
+      }
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
+      
+      let total = 0;
+      let count = 0;
+      
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Your cart is empty.</p>';
+      } else {
+        cartItemsDiv.innerHTML = cart.map(item => {
+          total += item.price * item.qty;
+          count += item.qty;
+          return `
+            <div class="cart-item">
+              <img src="${item.image}" alt="${item.name}">
+              <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>₹${item.price} x ${item.qty}</p>
+              </div>
+              <button class="remove-item" onclick="removeFromCart(${item.id})">×</button>
+            </div>
+          `;
+        }).join('');
+      }
+      
+      cartCount.innerText = count;
+      cartTotal.innerText = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    // Checkout Logic
+    function openCheckout() {
+      if (cart.length === 0) {
+        alert("Aapka cart khaali hai! Pehle products add karein.");
+        return;
+      }
+      toggleCart(); // Close cart
+      document.getElementById('checkout-modal').classList.add('active');
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkout-modal').classList.remove('active');
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('cust-name').value;
+      const phone = document.getElementById('cust-phone').value;
+      const address = document.getElementById('cust-address').value;
+      
+      let total = 0;
+      let productListText = "";
+      
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        productListText += `\n${index + 1}. *${item.name}* (Qty: ${item.qty}) - ₹${item.price * item.qty}`;
+      });
+
+      // Beautifully Formatted WhatsApp Message
+      const message = `*🏪 Vishwakarma Electrical Workshop - New Order*\n\n` +
+                      `*👤 Customer Name:* ${name}\n` +
+                      `*📱 Phone:* ${phone}\n` +
+                      `*📍 Address:* ${address}\n\n` +
+                      `*🛒 Order Details:*${productListText}\n\n` +
+                      `*💰 Total Amount:* ₹${total.toLocaleString('en-IN')}\n\n` +
+                      `*Payment:* I am ready to pay via UPI. Please share the QR code/UPI ID.`;
+      
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodedMessage}`, '_blank');
+      
+      // Reset
+      cart = [];
+      updateCartUI();
+      closeCheckout();
+      document.getElementById('checkout-form').reset();
+    }
+
+    // Initialize
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProducts();
+      updateCartUI();
+    });
+  </script>
 </body>
 </html>
